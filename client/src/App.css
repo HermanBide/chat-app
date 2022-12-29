@@ -1,0 +1,49 @@
+.App {
+  display: grid;
+  grid-template-areas: 
+  
+  "group-chat   panel-chat panel-chat"
+  "group-chat   panel-chat panel-chat"
+  "group-chat   panel-chat panel-chat";
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 95vh auto;
+  gap: 0 10px;
+  background-color: #efefef ;
+  width: 100vw;
+  height: 100vh;
+}
+
+.group-chat {
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  border:solid #ced4da;
+}
+
+.panel-chat {
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  border:solid #ced4da;
+}
+
+.btn {
+  border: none;
+  background-color: teal;
+  width: 100px;
+  padding: 10px;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.form-control {
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+  margin: 0 auto;
+}
+
+.panel-box {
+  background-color: #efefef;
+  padding: 5px;
+  margin: 5px 10px;
+}
