@@ -26,11 +26,12 @@ const form = ({ input, setInput }) => {
                 rows="4"
                 placeholder="Message"
                 value={input}
+                onChange={handleChange}
             />
         </div>
       </form>
 
-            <button type="submit" className="btn" onClick={handleChange}>send</button>
+            <button type="submit" className="btn" >send</button>
     </div>
   );
 };
