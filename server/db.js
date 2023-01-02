@@ -1,17 +1,21 @@
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
+const dotenv = require('dotenv');
+// import * as dotenv from 'dotenv'
 
-// const MONGODB_URI =
-//   process.env.PROD_MONGODB ||
-//   process.env.MONGODB_URI ||
-//   "mongodb://127.0.0.1:27017/goalPlannerDatabase";
+require("dotenv").config()
 
-// mongoose
-//   .connect(MONGODB_URI)
-//   .then(() => console.log("Successfully connected to mongoDB."))
-//   .catch((e) => console.error("MongoDB Connection Error: ", e.message));
+const MONGODB_URI =
+  process.env.PROD_MONGODB ||
+  process.env.MONGODB_URI
+  ||"mongodb+srv://bideherman:codelive22@chat-app.kp3ynbr.mongodb.net/?retryWrites=true&w=majority";
 
-// const db = mongoose.connection;
+mongoose
+  .connect(MONGODB_URI,{ useUnifiedTopology: true, useNewUrlParser: true})
+  .then(() => console.log("Successfully connected to mongoDB."))
+  .catch((e) => console.error("MongoDB Connection Error: ", e.message));
 
-// db.on("error", console.error.bind(console, "MongoDB connection error:"));
+const db = mongoose.connection;
 
-// module.exports = db;
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+
+module.exports = db;
