@@ -4,13 +4,9 @@ const dotenv = require('dotenv');
 
 require("dotenv").config()
 
-const MONGODB_URI =
-  process.env.PROD_MONGODB ||
-  process.env.MONGODB_URI
-  ||"mongodb+srv://bideherman:codelive22@chat-app.kp3ynbr.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose
-  .connect(MONGODB_URI,{ useUnifiedTopology: true, useNewUrlParser: true})
+  .connect(`mongodb+srv://${process.env.DB_User}:${process.env.DB_PW}@chat-app.kp3ynbr.mongodb.net/chatApp?retryWrites=true&w=majority`,{ useUnifiedTopology: true, useNewUrlParser: true})
   .then(() => console.log("Successfully connected to mongoDB."))
   .catch((e) => console.error("MongoDB Connection Error: ", e.message));
 
