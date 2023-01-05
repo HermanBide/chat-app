@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import Conversation from "./conversation";
+import { FaSearchPlus } from 'react-icons/fa'
 
-const group = () => {
+const chatbar = () => {
   const [search, setSearch] = useState("");
+
+  const rooms = [ 'MERN-Stack', 'MEAN-Stack', 'MEVN-Stack', 'LAMP-Stack', 'Serverless-Stack', 'Flutter']
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -13,48 +17,54 @@ const group = () => {
     setSearch(e.target.value);
   };
   return (
-    <div>
+    <div className="side-chat-container">
+
       <form className="search-bar" onSubmit={handleSearchSubmit} id="search-container">
         <input
           type="text"
-          className="search-bar__input"
+          className="search-bar-input"
           placeholder="Search"
           value={search}
         />
-        <button
+        <FaSearchPlus
           className="search-btn"
           type="submut"
           onChange={handleSearchChange}
-        >
-          search
-        </button>
+        />
+          {/* search
+        </FaSearchPlus> */}
       </form>
 
       <div className="all-groups">
         <h3>//Channels</h3>
-        <div>Group names</div>
-        <div>Group names</div>
-        <div>Group names</div>
-        <div>Group names</div>
+        {
+          rooms.map((roomName, index) => (
+            <div key={index}>
+            {roomName}
+            </div>
+          ))}
+            
       </div>
 
-      <div className="group-messages">
-        <h3>//Direct messages</h3>
+      <h3>//Direct messages</h3>
+      <div id="conversation-list">
         <div className="user-msg">
+        <Conversation />
+        <Conversation />
           <div className="conversation">
-            <img src="http://placehold.it/" alt="" />
-            <div className="title-text"></div>
-            <div className="created-date">5 min ago</div>
-            <div className="conversation-message"> Thank you</div>
+            <img className="profile-img" src="https://iili.io/HTL6qUF.md.jpg" alt="" />
+            <div className="title-text">ben smith</div>
           </div>
         </div>
+
       </div>
 
       <div className="new-message-container">
+      <p>New Message</p>
         <a href="#">+</a>
       </div>
     </div>
   );
 };
 
-export default group;
+export default chatbar;

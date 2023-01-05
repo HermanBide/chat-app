@@ -1,15 +1,34 @@
-import React from "react";
-import Group from "../group";
-import Panel from '../panel'
+import React, { 
+  useState, 
+  // useEffect 
+} from "react";
+import Chatbar from "../chatbar";
+import Chatbody from "../chatbody";
+import Chatfooter from "../chatfooter";
 
-const chatPage = () => {
+const chatPage = ({ room, setRoom }) => {
+  const [input, setInput] = useState("");
+  const [messageList, setMessageList] = useState([]);
+  const [currentMessage, setCurrentMessage] = useState("")
+
+  // useEffect(() => {
+  //   socket.on("receive_message", (data) => {
+    setCurrentMessage((list) => [...list.data]);
+  //   })
+  // }, [socket]);
+
+
+
   return (
     <div className="chat-page">
       <div className="group-chat">
-        <Group />
+        <Chatbar />
       </div>
-      <div className="group-panel-box">
-        <Panel />
+      <div className="msg-box">
+        <Chatbody />
+      </div>
+      <div className="chat-footer">
+        <Chatfooter input={input} setInput={setInput} />
       </div>
     </div>
   );
