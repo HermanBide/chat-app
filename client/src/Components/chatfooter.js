@@ -55,7 +55,7 @@ const chatfooter = ({ input, setInput, room, socket, username }) => {
         </div>
       </form>
           <div className="form-btn">
-            <button type="submit" className="btn" >send</button>
+            <button type="submit" className="btn" onClick={sendMessage}>send</button>
           </div>
     </div>
   );

@@ -8,12 +8,12 @@ import Chatfooter from "../chatfooter";
 
 const chatPage = ({ room, setRoom }) => {
   const [input, setInput] = useState("");
-  const [messageList, setMessageList] = useState([]);
-  const [currentMessage, setCurrentMessage] = useState("")
+  // const [messageList, setMessageList] = useState([]);
+  // const [currentMessage, setCurrentMessage] = useState("")
 
   // useEffect(() => {
   //   socket.on("receive_message", (data) => {
-    setCurrentMessage((list) => [...list.data]);
+    // setCurrentMessage((list) => [...list.data]);
   //   })
   // }, [socket]);
 

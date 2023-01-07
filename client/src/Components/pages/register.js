@@ -1,8 +1,9 @@
 import React, {useState} from "react";
-// import { Navigate } from "react-router-dom";
+import {Link } from "react-router-dom";
 // import ChatPage from "./chatPage";
-// import { useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { AiFillPicture, AiOutlinePlusCircle } from 'react-icons/ai'
+import { useSignupUserMutation } from "../../services/appApi";
 
 const register = ({
   email,
@@ -18,10 +19,11 @@ const register = ({
   joinRoom,
   socket,
 }) => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [image, setImage] = useState(null);
   const [uploadImg, setUploadImg] = useState(false)
   const [imagePreview, setImagePreview] = useState(null)
+  const [signupUser, {isLoading, error}] = useSignupUserMutation()
 
   const validateImg = (e) => {
       const imgFile = e.target.files[0];
@@ -37,11 +39,10 @@ const register = ({
   const uploadImage = async () => { 
     const imgData = new FormData();
     imgData.append('file', image);
-    imgData.append('upload')
+    imgData.append('upload_preset', 'zb5oa3ct');
     try {
       setUploadImg(true)
-      let res = await fetch('',{
-
+      let res = await fetch('https://api.cloudunary.com/v1_1/dtasfpf37/image/upload',{
         method: 'POST',
         body: imgData
       })
@@ -59,7 +60,13 @@ const register = ({
     e.preventDefault();
     if(!image) return alert('Please upload your profile picture')
     const url = await uploadImage(image)
-    return url
+    console.log(url)
+    signupUser({ username,email, password, picture: url}).then(({ data }) => {
+      if(data) {
+        console.log(data)
+        navigate('/chatPage')
+      }
+    })
     // const userInfo = {
     //   email,
     //   username,
@@ -91,8 +98,8 @@ const register = ({
       </div>
         <input
           type="text"
-          placeholder="username"
-          name="username"
+          placeholder="email"
+          name="email"
           className="signin-input"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
@@ -132,14 +139,16 @@ const register = ({
         { uploadImg ? "Signing you in..." : "Sign up" }
         </button>
         <div>
-          <p style={{ color: "white" }}>
+          <p style={{ color: "#495057" }}>
             Already have an account?{" "}
+            <Link to="/login">
             <span
               id="span"
               style={{ color: "#1d3557", fontSize: 16, fontWeight: 600 }}
             >
-              <href to="/login">. . .Log In</href>
+              Log in
             </span>
+            </Link>
           </p>
         </div>
       </form>

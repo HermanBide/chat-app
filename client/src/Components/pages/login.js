@@ -1,6 +1,13 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useLoginUserMutation } from "../../services/appApi";
 
 const login = ({ username, setUsername, password, setPassword }) => {
+
+  const [loginUser, {isLoading, error }] = useLoginUserMutation();
+  const navigate = useNavigate()
+
+
   // function successLogin() {
   //   alert("You have Logged in!!!");
   //   history.push("/home");
@@ -14,6 +21,12 @@ const login = ({ username, setUsername, password, setPassword }) => {
   const handleSubmit = async (e) => {
     // try {
     e.preventDefault();
+    loginUser({ username, password}).then(({ data}) => {
+      if(data) {
+        console.log(data)
+        navigate('/chatPage')
+      }
+    })
     //   const userInfo = {
     //     username,
     //     password,
@@ -36,8 +49,7 @@ const login = ({ username, setUsername, password, setPassword }) => {
   return (
     <div>
       <div className="register-title">
-        <h2>STACK-Talk</h2>
-        <p>This is application platform for users to chat and share ideas.</p>
+        <h4>Log into your account</h4>
       </div>
       <form className="signin-form" onSubmit={handleSubmit}>
         <input
@@ -63,11 +75,14 @@ const login = ({ username, setUsername, password, setPassword }) => {
           Log in
         </button>
         <div>
-          <p>
+          <p style={{ color: "#495057" }}> 
             you dont have an account?{" "}
-            <span id="span">
-              <href to="/signup">. . .Log In</href>
-            </span>{" "}
+            <Link to="/register">
+            <span id="span" style={{ color: "#1d3557", fontSize: 16, fontWeight: 600 }}>
+              . . .Register
+            </span>
+            </Link>
+              
           </p>
         </div>
       </form>
