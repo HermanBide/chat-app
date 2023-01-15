@@ -1,9 +1,9 @@
 const { Schema, model } = require("mongoose");
-const userSchema = new Schema(
+const messageSchema = new Schema(
   {
-    conversationId: { type: String, required: true },
-    sender: { type: String, required: true },
-    messageAKAtext: { type: String, required: true },
+    content: { type: String, trim: true },
+    sender: { type: Schema.Types.ObjectId, ref: "User"},
+    chat: { type: Schema.Types.ObjectId, ref: "Chat"},
     userId: {
       type: Schema.Types.ObjectId,
       ref: "User",
@@ -11,4 +11,4 @@ const userSchema = new Schema(
   },
   { timestamps: true }
 );
-module.exports = model("User", userSchema);
+module.exports = model("Message", messageSchema);

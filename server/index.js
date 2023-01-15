@@ -2,9 +2,12 @@ const express = require("express");
 const http = require("http");
 const cors = require("cors");
 const userRoutes = require("./routes/user");
+const chatRoutes = require("./routes/chat"); 
+const bodyParser = require("body-parser");
 require('./db')
 
 const { Server } = require("socket.io");
+const { errorHandler, notFound } = require("./utils/errorMiddleware");
 
 const PORT = process.env.PORT || 4000;
 const app = express();
@@ -12,7 +15,14 @@ require("dotenv").config();
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.json());
-app.use('/users', userRoutes)
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json());
+
+app.use('/api/user', userRoutes)
+app.use('/api/chat', chatRoutes)
+app.use(notFound)
+app.use(errorHandler)
+// app.use('/users', userRoutes)
 
 
 const server = http.createServer(app);
@@ -32,14 +42,17 @@ io.on("connection", (socket) => {
   console.log(`User connected ${socket.id}`);
 
   socket.on("join_room", (data) => {
-    const { username, room } = data; // Data sent from client when join_room event emitted
+    // Data sent from client when join_room event emitted
+    const { username, room } = data; 
     socket.join(data);
-    socket.join(room); // Join the user to a socket room
+    // Join the user to a socket room
+    socket.join(room); 
     console.log(`User with ID: ${socket.id} joined room: ${room}`);
 
-    let __createdtime__ = Date.now(); // Current timestamp
+    //Current timestamp
+    let __createdtime__ = Date.now(); 
 
-    // Send message to all users currently in the room, apart from the user that just joined
+    //Send message to all users currently in the room, apart from the user that just joined
     socket.to(room).emit("receive_message", {
       message: `${username} has joined the chat room`,
       username: CHAT_BOT,

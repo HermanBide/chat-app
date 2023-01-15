@@ -1,36 +1,10 @@
-const router = require('express').Router();
-const User = require('../models/user');
+const express = require("express")
+const router = express.Router();
+const {registerUser, loginUser, allUsers}= require('.././controllers/user')
+const { protect } = require('../utils/authMiddleware')
 
-//creating user
-router.post('/', async (req, res) => {
-    try {
-        const { username, email, password, picture } = req.body;
-        const user = await User.create(req.body);
-        res.status(201).json({ user });
-    } catch (err) {
-        let msg
-        if(err.code == 11000){
-            msg = "Username already exists"
-        } else {
-            msg = err.message
-        }
-        console.log(err)
-        res.status(500).json(msg);
-    }
-})
+// const User = require("../models/user");
 
-//login user
-router.post('/login', async (req, res) => {
-    try {
-        const { email, password } = req.body;
-        const user = await User.findByCredentials(email, password);
-        // user.status='online'
-        await user.save()
-        res.status(200).json({ user });
-    } catch (err) {
-        res.status(500).json({ message: err})
-        }
-    
-})
-
+router.route('/').post(registerUser).get(protect, allUsers)
+router.post('/login', loginUser)
 module.exports = router;
