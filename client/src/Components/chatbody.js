@@ -1,5 +1,5 @@
 import React from "react";
-import Message from "./message";
+
 
 const chatbody = () => {
   return (
@@ -61,10 +61,6 @@ const chatbody = () => {
             <div className="message-time">5 min ago</div>
           </div>
         </div>
-
-        <hr />
-        <Message />
-        <hr />
 
         <div className="message-row you-message">
           <div className="message-content">

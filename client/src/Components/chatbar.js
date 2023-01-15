@@ -1,11 +1,23 @@
-import React, { useState } from "react";
-import Conversation from "./conversation";
+import React, { 
+  // useEffect,
+   useState } from "react";
 import { FaSearchPlus } from 'react-icons/fa'
+// import axios from 'axios'
 
 const chatbar = () => {
   const [search, setSearch] = useState("");
+  // const [chats, setChats] = useState([])
 
   const rooms = [ 'MERN-Stack', 'MEAN-Stack', 'MEVN-Stack', 'LAMP-Stack', 'Serverless-Stack', 'Flutter']
+
+  // const fetchChat = async () => {
+  //   const {data}  = await axios.get('/')
+  // setChats(data)
+  // }
+
+  // useEffect(() => {
+  //   fetchChat();
+  // },[])
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -49,8 +61,6 @@ const chatbar = () => {
       <h3>//Direct messages</h3>
       <div id="conversation-list">
         <div className="user-msg">
-        <Conversation />
-        <Conversation />
           <div className="conversation">
             <img className="profile-img" src="https://iili.io/HTL6qUF.md.jpg" alt="" />
             <div className="title-text">ben smith</div>

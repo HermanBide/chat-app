@@ -1,5 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600");
 
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600");
+
+/* .app {
+  min-height: 100vh;
+  display: flex;
+  background-image: url('/');
+  background-size: cover;
+  background-position: center;
+} */
+
 * {
   margin: 0;
   padding: 0;
@@ -269,4 +279,29 @@ h2 {
 .search-btn:active{
   cursor: pointer;
   color: #03045e;
+}
+
+.Signup-profile-pic-container {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.signup-profile-pic{
+  width: 100px;
+  border-radius: 50%;
+  border: 2px solid gray;
+  object-fit: cover;
+  height: 100px;
+}
+
+.add-pic-icon {
+  position:absolute;
+  bottom: 0;
+  right: 10px;
+  color: green;
+  background-color: white;
+  cursor: pointer;
+  z-index: 99;
 }

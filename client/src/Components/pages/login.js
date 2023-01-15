@@ -1,12 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useLoginUserMutation } from "../../services/appApi";
 
-const login = ({ username, setUsername, password, setPassword }) => {
-
-  const [loginUser, {isLoading, error }] = useLoginUserMutation();
+const login = ({ email, setEmail, password, setPassword }) => {
+  const [loading, setLoading] = useState(false)
+  const [show, setShow] = useState(false)
   const navigate = useNavigate()
 
+  const handleClick = () => {
+    setShow(!show)
+  }
 
   // function successLogin() {
   //   alert("You have Logged in!!!");
@@ -19,14 +21,34 @@ const login = ({ username, setUsername, password, setPassword }) => {
   // }
 
   const handleSubmit = async (e) => {
-    // try {
     e.preventDefault();
-    loginUser({ username, password}).then(({ data}) => {
-      if(data) {
-        console.log(data)
-        navigate('/chatPage')
-      }
-    })
+    setLoading(true);
+    if(!email || !password) {
+      setLoading(false)
+      return alert("Please fill in all fields")
+    }
+    try {
+      const config = {
+        headers: { "Content-Type": "application/json" },
+      };
+      const { data } = await fetch(
+        "/api/user/login",
+        { email, password },
+        config
+      );
+      localStorage.getItem("userInfo", JSON.stringify(data));
+      setLoading(false);
+      navigate("/chatPage");
+      return alert('successful login');
+    } catch (err) {
+      console.log(err);
+    }
+    // loginUser({ username, password}).then(({ data}) => {
+    //   if(data) {
+    //     console.log(data)
+    //     navigate('/chatPage')
+    //   }
+    // })
     //   const userInfo = {
     //     username,
     //     password,
@@ -52,14 +74,17 @@ const login = ({ username, setUsername, password, setPassword }) => {
         <h4>Log into your account</h4>
       </div>
       <form className="signin-form" onSubmit={handleSubmit}>
+      <label>Email</label>
         <input
           type="text"
-          placeholder="username"
-          name="username"
+          placeholder="email"
+          name="email"
           className="signin-input"
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          required
         />
+        <label>password</label>
         <input
           type="text"
           placeholder="password"
@@ -67,6 +92,7 @@ const login = ({ username, setUsername, password, setPassword }) => {
           className="signin-input"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
+          required
         />
         <button className="signin-btn" 
           // onClick={joinRoom} 

@@ -19,21 +19,21 @@ const chatfooter = ({ input, setInput, room, socket, username }) => {
         setInput(e.target.value);
     }
 
-    const sendMessage = async () => {
-      if (input !== "") {
-        const messageData = {
-          room: room,
-          sender: username,
-          message: input,
-          timestamp:
-            new Date(Date.now()).getHours() +
-            ":" +
-            new Date(Date.now()).getMinutes,
-        };
-        await socket.emit("send_message", messageData);
-        console.log("Sent message");
-      }
-    };
+    // const sendMessage = async () => {
+    //   if (input !== "") {
+    //     const messageData = {
+    //       room: room,
+    //       sender: username,
+    //       message: input,
+    //       timestamp:
+    //         new Date(Date.now()).getHours() +
+    //         ":" +
+    //         new Date(Date.now()).getMinutes,
+    //     };
+    //     await socket.emit("send_message", messageData);
+    //     console.log("Sent message");
+    //   }
+    // };
     
 
   return (
@@ -55,7 +55,13 @@ const chatfooter = ({ input, setInput, room, socket, username }) => {
         </div>
       </form>
           <div className="form-btn">
-            <button type="submit" className="btn" onClick={sendMessage}>send</button>
+            <button 
+              type="submit" 
+              className="btn" 
+              // onClick={sendMessage}
+            >
+            send
+            </button>
           </div>
     </div>
   );
