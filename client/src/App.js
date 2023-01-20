@@ -11,7 +11,7 @@ import io from "socket.io-client";
 const socket = io.connect("http://localhost:4000");
 
 function App() {
-  // const [user, setUser] = useState(false);
+  // const [user, setUser] = useState();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +19,9 @@ function App() {
   const [message, setMessage] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const [showChat, setShowChat] = useState(false);
+  const [
+    // showChat
+    , setShowChat] = useState(false);
 
   const joinRoom = () => {
     if (username !== "" && room !== "") {

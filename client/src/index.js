@@ -3,6 +3,7 @@ import React from "react";
 import * as ReactDOMClient from "react-dom/client";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
+import ChatProvider from "./Context/ChatProvider";
 
 
 
@@ -10,9 +11,9 @@ const root = ReactDOMClient.createRoot(document.getElementById("root"));
 
 
 root.render(
-  <React.StrictMode> 
+  <ChatProvider> 
         <BrowserRouter>
           <App />
         </BrowserRouter>
-  </React.StrictMode>
+  </ChatProvider>
 );

@@ -3,12 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 
 const login = ({ email, setEmail, password, setPassword }) => {
   const [loading, setLoading] = useState(false)
-  const [show, setShow] = useState(false)
+  // const [show, setShow] = useState(false)
   const navigate = useNavigate()
 
-  const handleClick = () => {
-    setShow(!show)
-  }
+  // const handleClick = () => {
+  //   setShow(!show)
+  // }
 
   // function successLogin() {
   //   alert("You have Logged in!!!");
@@ -43,29 +43,6 @@ const login = ({ email, setEmail, password, setPassword }) => {
     } catch (err) {
       console.log(err);
     }
-    // loginUser({ username, password}).then(({ data}) => {
-    //   if(data) {
-    //     console.log(data)
-    //     navigate('/chatPage')
-    //   }
-    // })
-    //   const userInfo = {
-    //     username,
-    //     password,
-    //   };
-    //   // const user = await loginUser(userInfo);
-    //   // props.setUser(user);
-    //   // if (user) {
-    //   //   successLogin();
-    //   // } else {
-    //   //   failedLogin();
-    //   // }
-    //   // history.push("/home");
-    //   // if((userInfo === user) && (userInfo === user)) {
-    //   // }
-    // } catch (error) {
-    //   console.error(error.message);
-    // }
   };
 
   return (

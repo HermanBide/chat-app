@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 // import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AiFillPicture, AiOutlinePlusCircle } from "react-icons/ai";
+import { BiHide } from 'react-icons/bi'
+import { Button } from "@mui/material";
 
 
 const register = ({
@@ -20,7 +22,6 @@ const register = ({
   joinRoom,
   socket,
 }) => {
-
   const [image, setImage] = useState(null);
   const [uploadImg, setUploadImg] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -70,7 +71,7 @@ const register = ({
     console.log(url);
     if (!username || !email || !password) {
       setLoading(false);
-      return alert('Please Fill in all Fields');
+      return alert("Please Fill in all Fields");
     }
 
     try {
@@ -81,90 +82,124 @@ const register = ({
         "/api/user",
         { username, email, password, picture },
         config
-        );
-        localStorage.setItem("userInfo", JSON.stringify(data));
-        setLoading(false);
-        navigate("/chatPage");
-        return alert('successful registration');
+      );
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      setLoading(false);
+      navigate("/chatPage");
+      return alert("successful registration");
     } catch (err) {
       console.log(err);
     }
   };
 
   return (
-    <div className="home">
-      <div className="register-title">
-        <h2>Create account</h2>
-      </div>
-      <form className="signin-form" onSubmit={handleSubmit}>
-        <div className="Signup-profile-pic-container">
-          <img src={picture} className="signup-profile-pic" alt="profile-pic"/>
-          <label htmlFor="image-upload" className="iamge-upload-label">
-            <AiOutlinePlusCircle className="add-pic-icon" />
-            <AiFillPicture />
-          </label>
-          <input
-            type="file"
-            id="image-upload"
-            hidden
-            accept="image/*"
-            onChange={validateImg}
-            // onChange={(e) => postPic(e.target.files[0])}
-          ></input>
-        </div>
-        <label>Email</label>
-        <input
-          type="text"
-          placeholder="email"
-          name="email"
-          className="signin-input"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
-        <label>Username</label>
-        <input
-          type="text"
-          placeholder="username"
-          name="username"
-          className="signin-input"
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
-        />
-        <label>Password</label>
-        <input
-          type="text"
-          placeholder="password"
-          name="password"
-          className="signin-input"
-          value={show ? "text" : password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-        {/* <button onClick={handleSubmit}>
+    <div className="form-container">
+      <div className="form-register">
+        <div className="form-content">
+          <header>Create account</header>
+
+          <form  className="form" onSubmit={handleSubmit}>
+
+            <div className="Signup-profile-pic-container">
+              {/* <img
+                src={picture}
+                className="signup-profile-pic"
+                alt="profile-pic"
+              /> */}
+              <label htmlFor="image-upload" className="iamge-upload-label">
+                <AiOutlinePlusCircle className="add-pic-icon" />
+                <AiFillPicture />
+              </label>
+              <input
+                type="file"
+                id="image-upload"
+                hidden
+                accept="image/*"
+                onChange={validateImg}
+                // onChange={(e) => postPic(e.target.files[0])}
+              />
+              <Button className="pic-btn" variant="contained">upload Image</Button>
+            </div>
+
+
+
+            <div className="field input-field">
+            <label id="label">Email</label>
+            <br/>
+            <input
+              type="text"
+              placeholder="Email"
+              name="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              required
+            />
+            </div>
+            
+
+
+            <div className="field input-field"> 
+            <label id="label">Username</label>
+            <input
+              type="text"
+              placeholder="Username"
+              name="username"
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+              required
+            />
+            </div>
+
+
+
+            <div className="field input-field" >
+            <label id="label">Password</label>
+            <input
+              type="text"
+              placeholder="Password"
+              name="password"
+              value={show ? "text" : password}
+              onChange={(event) => setPassword(event.target.value)}
+              required
+            />
+            <BiHide className="eye-icon"/>
+            </div>
+    <br/>
+
+
+            {/* <button onClick={handleSubmit}>
             { show ? "show": "hide"}
           </button> */}
+          <div className="field button-field">
+            <button
+              className="signin-btn"
+              // isLoading={isLoading}
+              type="submit"
+            >
+              {uploadImg ? "Signing you in..." : "Sign up"}
+            </button>
+          </div>
 
-        <button
-          className="signin-btn"
-          // isLoading={isLoading}
-          type="submit"
-        >
-          {uploadImg ? "Signing you in..." : "Sign up"}
-        </button>
 
-        <div>
-          <p style={{ color: "#495057" }}>
-            Already have an account?{" "}
-            <Link to="/login">
-              <span
-                id="span"
-                style={{ color: "#1d3557", fontSize: 16, fontWeight: 600 }}
-              >
-                Log in
-              </span>
-            </Link>
-          </p>
+            <div className="form-link" >
+              <p style={{ color: "#495057" }}>
+                Already have an account?
+                <Link to="/login"  style={{ textDecoration: 'none' }} >
+                  <span
+                    id="span"
+                    style={{ color: "#1d3557", fontSize: 16, fontWeight: 600, textDecoration: 'none' }}
+                  >
+                    {'_'}Log in
+                  </span>
+                </Link>
+              </p>
+            </div>
+
+          </form>
+
+
         </div>
-      </form>
+      </div>
     </div>
   );
 };

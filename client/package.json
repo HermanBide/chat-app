@@ -6,7 +6,7 @@
     "@chakra-ui/react": "^2.4.8",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "@mui/material": "^5.11.4",
+    "@mui/material": "^5.11.5",
     "@mui/styled-engine-sc": "^5.11.0",
     "@reduxjs/toolkit": "^1.9.1",
     "axios": "^1.2.2",
@@ -20,7 +20,7 @@
     "react-redux": "^8.0.5",
     "react-router-bootstrap": "^0.26.2",
     "react-router-dom": "^6.0.1",
-    "react-scripts": "0.9.5",
+    "react-scripts": "4.0.3",
     "react-select": "^5.7.0",
     "react-toastify": "^9.1.1",
     "redux": "^4.2.0",
@@ -44,10 +44,22 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "type":"module"
+    "type": "module"
   },
   "exports": {
     "import": "./dist/redux-toolkit.esm.mjs",
     "require": "./dist/index.js"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

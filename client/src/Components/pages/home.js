@@ -1,7 +1,21 @@
-import React from "react";
+import React, { 
+  useEffect, 
+  // useState 
+} from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 // import { Container, Text, Box, Tab, TabList, TabPanel, Tabs, TabPanels } from "@chakra-ui/react";
+
 const home = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("userInfo"));
+    if (user) {
+      navigate("/chatPage");
+    }
+  }, [navigate]);
+
   return (
     <div className="row">
       home for you.. yay!
@@ -18,32 +32,9 @@ const home = () => {
           className="home-img"
           style={{ height: "92vh", backgroundColor: "gray" }}
         >
-          <img src=" " alt="home" />
+          {/* <img src="/" alt="home" /> */}
         </div>
       </div>
-      {/* <Container maxW="xl" centerContent>
-        <Box d="flex" justifyContent="center" w="100%" m="40px 0 15px 0" bo>
-          <Text color="black">Chat App</Text>
-        </Box>
-        <Box bg="white" w="100%" p={4} borderRadius="lg" borderWidth="1px">
-          <Tabs variant="soft-rounded">
-            <TabList mb='1em'>
-              <Tab width='50%'>login</Tab>
-              <Tab width='50%'>signup</Tab>
-            </TabList>
-            <TabPanels>
-              <TabPanel>
-              <Login /> 
-
-              </TabPanel>
-              <TabPanel>
-              <Register />
-
-              </TabPanel>
-            </TabPanels>
-          </Tabs>
-        </Box>
-      </Container> */}
     </div>
   );
 };

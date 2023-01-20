@@ -1,34 +1,32 @@
-import React, { 
-  useState, 
-  // useEffect 
+import React, {
+  useState,
+  // useEffect
 } from "react";
-import Chatbar from "../chatbar";
-import Chatbody from "../chatbody";
-import Chatfooter from "../chatfooter";
+import Chatbar from "../chatComponents/chatbar";
+import Chatbody from "../chatComponents/chatbody";
+import Chatfooter from "../chatComponents/chatfooter";
+import { ChatState } from "../../Context/ChatProvider";
+import "./chatPage.css";
 
-const chatPage = ({ room, setRoom }) => {
-  const [input, setInput] = useState("");
+const chatPage = () => {
+  // const { user } = ChatState()
   // const [messageList, setMessageList] = useState([]);
   // const [currentMessage, setCurrentMessage] = useState("")
 
   // useEffect(() => {
   //   socket.on("receive_message", (data) => {
-    // setCurrentMessage((list) => [...list.data]);
+  // setCurrentMessage((list) => [...list.data]);
   //   })
   // }, [socket]);
 
-
-
   return (
-    <div className="chat-page">
-      <div className="group-chat">
+    <div className="body">
+      {/* {user && } */}
+      <div className="container">
+        {/* { user &&  <Chatbar />} */}
         <Chatbar />
-      </div>
-      <div className="msg-box">
+        {/* { user && <Chatbody /> } */}
         <Chatbody />
-      </div>
-      <div className="chat-footer">
-        <Chatfooter input={input} setInput={setInput} />
       </div>
     </div>
   );
